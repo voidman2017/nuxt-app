@@ -36,7 +36,7 @@
           <p class="no-data">暂无数据</p>
         </ul>
         <!-- 翻页器 -->
-        <PageTurner :page="Article.page" :size="Article.size" :total="Article.total" :baseUrl="'http://news.trc.com/list/'+ Article.subId + '/'"/>
+        <PageTurner :page="Article.page" :size="Article.size" :total="Article.total" :baseUrl="'/list/'+ Article.subId + '/'"/>
       </div>
       <!-- 右侧副栏目 -->
       <div class="sub-list">
@@ -81,7 +81,7 @@ export default {
       Service.List.getListTkd(id),
       Service.List.getListBanner(id),
       Service.List.getListNav(id),
-      Service.List.getListArticle(id, page,1),
+      Service.List.getListArticle(id, page , 1),
       Service.Common.getHotArticle()
     ]).then(res => {
       return res;

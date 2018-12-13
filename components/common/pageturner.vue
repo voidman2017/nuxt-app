@@ -5,7 +5,7 @@
         上一页
         <a :href="fullUrl('last')" class="block-link"></a>
       </li>
-      <li v-if="page>showSize/2">···</li>
+      <li v-if="page > showSize/2 && page > total-showSize/2">···</li>
       <li v-for="(item) in PageList" :key="item" :class="[page==item ? 'pre-index':'']">
         <a :href="baseUrl+item" class="block-link"></a>
         {{item}}
