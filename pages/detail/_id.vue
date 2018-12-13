@@ -1,51 +1,46 @@
 <template>
-  <section class="container">
-    <div>
-      详情页id ：{{params.id}}
-    </div>
-    <p>{{number}}</p>
-  </section>
+  <div id="page-detail">
+    <!-- 顶部导航 -->
+    <Navigation/>
+    <section class="article">
+      <h3 class="article-title txtc">{{articleDetail.title}}</h3>
+      <article class="article-content" v-html="articleDetail.content"></article>
+    </section>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
+import Service from "~/service";
+import Navigation from "~/components/common/navigation.vue";
+
 export default {
-  middleware: "listCtr",
-  data() {
-    return {
-      text: ""
-    };
-  },
-  // asyncData({ params }) {
-  //   return new Promise((resolve,reject)=>{
-  //     resolve(Math.random())
-  //   }).then((res)=>{
-  //     return { params, text: res};
-  //   })
-  // },
-  async asyncData ({ params }) {
-    let { number , list } = await new Promise((resolve,reject)=>{
-      var start = new Date();
-      resolve(Math.random())
-    }).then((res)=>{
-      return { number : res , list : [1,2,3,4,5]}
-    })
-   return { params, number , list };
-  },
-  layout(context) {
-    return "light";
+  components: { Navigation },
+  async asyncData({ app, params }) {
+    const { id } = params;
+    const homeData = await Promise.all([
+      Service.Detail.getDetailNav(id),
+      Service.Detail.getArticleDetail(id)
+    ]).then(res => {
+      return res;
+    });
+
+    const [detailNav, articleDetail] = homeData;
+    return { detailNav, articleDetail };
   },
   head() {
-    const { id } = this.params;
     return {
-      title: `详情页-${id}`,
+      title: this.articleDetail.title,
       meta: [
         {
           hid: "description",
           name: "description",
-          content: "this is app page list"
+          content: this.articleDetail.description
         },
-        { hid: "keywords", name: "keywords", content: "pageList" }
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: this.articleDetail.keyword
+        }
       ]
     };
   }
@@ -53,4 +48,18 @@ export default {
 </script>
 
 <style>
+#page-detail {
+  padding-top: 100px;
+}
+.article {
+  width: 800px;
+  margin: 20px auto;
+}
+.article-title {
+  line-height: 50px;
+  font-size: 22px;
+}
+.article img {
+  max-width: 100%;
+}
 </style>

@@ -29,7 +29,7 @@ img:after{content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: 0;
 .textCenter{text-align:center;} /* 兼容旧代码 */
 .fl,.left{float: left;}
 .fr,.right{float: right;}
-
+.txtc{text-align: center;}
 
 /*
 	==== navbar 全站导航栏 ====
