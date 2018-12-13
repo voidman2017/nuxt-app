@@ -3,11 +3,11 @@
     <!-- 栏目头部 -->
     <nav class="category-nav">
       <h3 class="title">
-        <a href="/list/1_1">{{category.name}}</a>
+        <a :href="'/list/'+category.id">{{category.name}}</a>
       </h3>
       <ul>
         <li v-for="(subCategory,index) in category.subCategorys" :key="subCategory.subId" :class="[index == active ? 'on' : '']" @mouseover="changeCategory(index)">
-          <a :title="subCategory.subName" href="/list/1_1">
+          <a :title="subCategory.subName" :href="'/list/'+subCategory.subId">
             <span>{{subCategory.subName}}</span>
           </a>
         </li>
@@ -20,7 +20,7 @@
         <ul class="article-list clearfix">
           <li v-for="(article) in subCategory.articles" :key="article.id">
             {{article.title}}
-            <a :href="articlePath(article.id)" class="block-link"></a>
+            <a :href="articlePath(article.id)" class="block-link" target="_blank"></a>
           </li>
         </ul>
       </li>

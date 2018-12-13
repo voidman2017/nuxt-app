@@ -1,7 +1,7 @@
 <template>
   <div class="page-index">
     <!-- 顶部导航 -->
-    <Navigation :navList="navigation"/>
+    <Navigation/>
     <!-- 轮播及推荐文章 -->
     <section class="page-hot center clearfix">
       <Banner :bannerList="banner"/>
@@ -15,12 +15,11 @@
 </template>
 
 <script>
-import Navigation from "~/components/home/navigation.vue";
+import Navigation from "~/components/common/navigation.vue";
 import Banner from "~/components/home/banner.vue";
 import Article from "~/components/home/article.vue";
 import Category from "~/components/home/category.vue";
 import Service from "~/service";
-import ajax from "~/lib/ajax";
 export default {
   async asyncData({ app }) {
     /* const [{data:TKD},{data:navigation},{data:banner}] = await Promise.all([
@@ -32,16 +31,14 @@ export default {
 
     const homeData = await Promise.all([
       Service.Home.getTkd(),
-      Service.Home.getNavigation(),
       Service.Home.getBanner(),
       Service.Home.getRecommendArticle(),
-      Service.Home.getCategory(),
+      Service.Home.getCategory()
     ]).then(res => {
       return res;
     });
-    const [ TKD, navigation, banner, recommendArticle, category  ] = homeData;
-    return { TKD, navigation, banner, recommendArticle, category };
-
+    const [TKD, banner, recommendArticle, category] = homeData;
+    return {TKD, banner, recommendArticle, category };
   },
   // middleware: "appEntry",
   components: { Navigation, Banner, Article, Category },
@@ -62,6 +59,11 @@ export default {
 </script>
 
 <style>
-.page-hot{margin-top: 60px;}
-.category-wrap{margin: 40px auto;color: #525252; }
+.page-hot {
+  margin-top: 60px;
+}
+.category-wrap {
+  margin: 40px auto;
+  color: #525252;
+}
 </style>

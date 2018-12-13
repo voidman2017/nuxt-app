@@ -1,9 +1,11 @@
-import Home from "./home";
 import Common from "./common";
+import Home from "./home";
+import List from "./list";
 
 const API = {
-  Home,
   Common,
+  Home,
+  List,
 };
 
 export default API;

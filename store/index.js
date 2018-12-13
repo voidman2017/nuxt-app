@@ -1,17 +1,17 @@
 export const state = () => {
   return {
-    list: []
+    nav:[],
   }
 }
 
 export const mutations = {
-  GET_LIST (state, list) {
-    state.list = list || []
+  GET_NAV (state, nav) {
+    state.nav = nav || []
   }
 }
 
 export const getters = {
-  getList (state){
-    return state.list
+  getNav(state){
+    return state.nav
   }
 }
